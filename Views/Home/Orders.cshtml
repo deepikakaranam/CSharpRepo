@@ -1,0 +1,89 @@
+@model Order
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" asp-action="Index" asp-controller="Home">Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="orders" asp-controller="Home">Orders</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="customers" asp-controller="Home">Customers</a>
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="products" asp-controller="Home">Products</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="settings" asp-controller="Home">Settings</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>
+    </form>
+    <h1>Add a new Order</h1>
+    
+     <form asp-action="createOrder" asp-controller="Home" method="post">
+       
+      <div class="form-group">
+        <span asp-validation-for="CustomerId"></span>
+        <label asp-for="CustomerId" >CustomerName</label>
+        <select class="form-control" id="CustomerId" name="CustomerId" >
+            @foreach ( var customer in ViewBag.Customers)
+            {               
+                <option value="@customer.CustomerId">@customer.CustomerName</option>                             
+            }
+            </select> 
+      </div>
+      <div class="form-group">
+        <span asp-validation-for="ProductId"></span>
+        <label asp-for="ProductId" >Product</label>
+        <select class="form-control" id="ProductId" name="ProductId" >
+            @foreach ( var product in ViewBag.Products)
+            {               
+                <option value="@product.ProductId">@product.ProductName</option>                             
+            }
+            </select>
+      </div>
+      <div class="form-group">
+        <span asp-validation-for="Quantity"></span>
+        <label asp-for="Quantity" >Quantity</label>
+        <select class="form-control" id="Quantity" name="Quantity" >
+           @foreach ( var product in ViewBag.Products)
+            {               
+                <option >@product.Quantity</option>                             
+            }
+            </select>
+      </div>
+     
+        <input value="Add" type="submit"> 
+    </form>
+    <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        
+        <th scope="col">Customer Name</th>
+        <th scope="col">Product</th>
+        <th scope="col">Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach(var order in ViewBag.Orders)
+    {
+       <tr>
+        
+        <td>@order.CustomerOrdered.CustomerName</td>
+        <td>@order.OrderedProduct.ProductName</td>
+        <td>@order.OrderedProduct.Quantity</td>
+      </tr>
+      
+    }
+     
+    </tbody>
+  </table>
+
+    

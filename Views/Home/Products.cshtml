@@ -1,0 +1,57 @@
+@model Product
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" asp-action="Index" asp-controller="Home">Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="orders" asp-controller="Home">Orders</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="customers" asp-controller="Home">Customers</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="products" asp-controller="Home">Products</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="settings" asp-controller="Home">Settings</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>
+    </form>
+    <h1>Add a new Product<h1>
+    <form asp-action="createProduct" asp-controller="Home" method="post">
+      <div class="form-group">
+        <span asp-validation-for="ProductName"></span>
+        <label asp-for="ProductName">Name:</label>
+        <input asp-for="ProductName">
+      </div>
+      
+      <div class="form-group">
+        <span asp-validation-for="Description"></span>
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description">
+      </div>
+       <div class="form-group">
+          <label asp-for="Quantity">Quantity</label>
+          <select class="form-control"  asp-for="Quantity" id="exampleFormControlSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+    <input value="Add" type="submit"> 
+    </form>
+    @foreach (var product in ViewBag.Products)
+    {
+      <h1>@product.ProductName</h1>
+      <h5>Quantity :@product.Quantity</h5>
+    }

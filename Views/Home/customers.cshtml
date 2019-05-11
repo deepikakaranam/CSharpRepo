@@ -1,0 +1,62 @@
+@model Customer
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" asp-action="Index" asp-controller="Home">Dashboard</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="orders" asp-controller="Home">Orders</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="customers" asp-controller="Home">Customers</a>
+<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="products" asp-controller="Home">Products</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" asp-action="settings" asp-controller="Home">Settings</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>
+    </form>
+    <h1>Add a new Customer</h1>
+    
+    <form asp-action="createCustomer" asp-controller="Home" method="post">
+      <div class="form-group">
+        <span asp-validation-for="CustomerName"></span>
+        <label asp-for="CustomerName">CustomerName</label>
+        <input asp-for="CustomerName">
+    </div>
+    <input value="Add" type="submit"> 
+    </form>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        
+        <th scope="col">Customer Name</th>
+        <th scope="col">Created Date</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach(var customer in ViewBag.Customers)
+    {
+       <tr>
+        
+        <td>@customer.CustomerName</td>
+        <td>@customer.CreatedDate</td>
+        <td><a>Remove</a></td>
+      </tr>
+      
+    }
+     
+    </tbody>
+  </table>
+
+    
